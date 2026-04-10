@@ -1,0 +1,9 @@
+[submodule "Power-Paint-Socket"]
+	path = Power-Paint-Socket
+	url = https://github.com/Wo0zZ1/Power-Paint-Socket
+[submodule "Power-Paint-Web"]
+	path = Power-Paint-Web
+	url = https://github.com/Wo0zZ1/Power-Paint-Web
+[submodule "Power-Paint-Migrator"]
+	path = Power-Paint-Migrator
+	url = https://github.com/Wo0zZ1/Power-Paint-Migrator
