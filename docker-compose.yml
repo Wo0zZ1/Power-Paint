@@ -32,6 +32,10 @@ services:
         condition: service_healthy
 
   web:
+    deploy:
+      resources:
+        limits:
+          memory: 0.25G
     build:
       context: ./Power-Paint-Web
       dockerfile: dockerfile
@@ -58,10 +62,8 @@ services:
       EMAIL_LOGIN: $EMAIL_LOGIN
       EMAIL_PASSWORD: $EMAIL_PASSWORD
       REACT_QUERY_DEVTOOLS_ENABLED: $REACT_QUERY_DEVTOOLS_ENABLED
-      NODE_ENV: $NODE_ENV
       NODE_OPTIONS: $NODE_OPTIONS
-    ports:
-      - $WEB_PORT:$WEB_PORT
+      PORT: $WEB_PORT
     networks:
       - power-paint-network
     depends_on:
@@ -74,8 +76,6 @@ services:
     build:
       context: ./Power-Paint-Socket
       dockerfile: dockerfile
-    ports:
-      - $SOCKET_PORT:$SOCKET_PORT
     environment:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
@@ -85,10 +85,9 @@ services:
       POSTGRES_SCHEMA: $POSTGRES_SCHEMA
       POSTGRES_SSLMODE: $POSTGRES_SSLMODE
       DATABASE_SSL_REJECT_UNAUTHORIZED: $DATABASE_SSL_REJECT_UNAUTHORIZED
-      PORT: $SOCKET_PORT
       WS_TOKEN_SECRET: $WS_TOKEN_SECRET
       HOCUSPOCUS_DOCUMENTS_TABLE: $HOCUSPOCUS_DOCUMENTS_TABLE
-
+      PORT: $SOCKET_PORT
     networks:
       - power-paint-network
     depends_on:
@@ -97,6 +96,22 @@ services:
       migrator:
         condition: service_completed_successfully
 
+  nginx:
+    image: nginx:alpine
+    container_name: power-paint-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      # - ./certbot/www:/var/www/certbot:ro
+      # - ./certbot/conf:/etc/nginx/ssl:ro
+    networks:
+      - power-paint-network
+    depends_on:
+      - web
+      - socket
 volumes:
   pgdata:
 
