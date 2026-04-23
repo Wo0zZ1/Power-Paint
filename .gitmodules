@@ -7,3 +7,6 @@
 [submodule "Power-Paint-Migrator"]
 	path = Power-Paint-Migrator
 	url = https://github.com/Wo0zZ1/Power-Paint-Migrator
+[submodule "Power-Paint-E2E"]
+	path = Power-Paint-E2E
+	url = https://github.com/Wo0zZ1/Power-Paint-E2E.git
