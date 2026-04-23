@@ -136,13 +136,13 @@ services:
 
   e2e:
     build:
-      context: ./e2e
+      context: ./Power-Paint-E2E
       dockerfile: dockerfile
     environment:
       WEB_HOST: ${WEB_HOST}
       WEB_PORT: ${WEB_PORT}
     volumes:
-      - ./e2e/playwright-report:/app/playwright-report
+      - ./Power-Paint-E2E/playwright-report:/app/playwright-report
     depends_on:
       - web
       - socket
