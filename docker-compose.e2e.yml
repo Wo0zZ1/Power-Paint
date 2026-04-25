@@ -124,7 +124,6 @@ services:
 
   mailhog:
     image: mailhog/mailhog
-    restart: always
     ports:
       - "8025:8025" # Web UI
       - "1025:1025" # SMTP
@@ -140,9 +139,12 @@ services:
       MAILHOG_URL: http://mailhog:8025
     volumes:
       - ./Power-Paint-E2E/playwright-report:/app/playwright-report
+      - ./Power-Paint-E2E/test-results:/app/test-results
+      - ./Power-Paint-E2E/screenshots:/app/screenshots
     depends_on:
       - web
       - socket
+      - nginx
       - mailhog
     networks:
       - power-paint-network

@@ -29,19 +29,26 @@ jobs:
       - name: Generate .env.test from secrets
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.test
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env.test
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.test
-          echo "RUN_SEED=true" >> .env.test
+          echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> .env.test
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.test
+          echo "RUN_SEED=${{ secrets.RUN_SEED }}" >> .env.test
           echo "AUTH_GOOGLE_ID=${{ secrets.AUTH_GOOGLE_ID }}" >> .env.test
           echo "AUTH_GOOGLE_SECRET=${{ secrets.AUTH_GOOGLE_SECRET }}" >> .env.test
           echo "AUTH_GITHUB_ID=${{ secrets.AUTH_GITHUB_ID }}" >> .env.test
           echo "AUTH_GITHUB_SECRET=${{ secrets.AUTH_GITHUB_SECRET }}" >> .env.test
           echo "AUTH_SECRET=${{ secrets.AUTH_SECRET }}" >> .env.test
+          echo "AUTH_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env.test
+          echo "NEXT_PUBLIC_WS_URL=${{ secrets.NEXT_PUBLIC_WS_URL }}" >> .env.test
+          echo "NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env.test
           echo "NEXT_PUBLIC_BASE_DEPLOY_URL=${{ secrets.NEXT_PUBLIC_BASE_DEPLOY_URL }}" >> .env.test
           echo "EMAIL_HOST=${{ secrets.EMAIL_HOST }}" >> .env.test
           echo "EMAIL_PORT=${{ secrets.EMAIL_PORT }}" >> .env.test
           echo "EMAIL_LOGIN=${{ secrets.EMAIL_LOGIN }}" >> .env.test
           echo "EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}" >> .env.test
-          echo "WEB_HOST=web" >> .env.test
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env.test
+          echo "WEB_HOST=${{ secrets.WEB_HOST }}" >> .env.test
           echo "WEB_PORT=${{ secrets.WEB_PORT }}" >> .env.test
           echo "WS_TOKEN_SECRET=${{ secrets.WS_TOKEN_SECRET }}" >> .env.test
 
