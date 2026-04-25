@@ -111,9 +111,6 @@ services:
       WEB_PORT: $WEB_PORT
       SOCKET_HOST: $SOCKET_HOST
       SOCKET_PORT: $SOCKET_PORT
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/templates/power-paint.conf.template:/etc/nginx/templates/default.conf.template:ro
@@ -129,8 +126,8 @@ services:
     image: mailhog/mailhog
     restart: always
     ports:
-      - "1025:1025" # SMTP
       - "8025:8025" # Web UI
+      - "1025:1025" # SMTP
     networks:
       - power-paint-network
 
@@ -139,15 +136,14 @@ services:
       context: ./Power-Paint-E2E
       dockerfile: dockerfile
     environment:
-      WEB_HOST: ${WEB_HOST}
-      WEB_PORT: ${WEB_PORT}
+      WEB_URL: ${NEXT_PUBLIC_BASE_URL}
+      MAILHOG_URL: http://mailhog:8025
     volumes:
       - ./Power-Paint-E2E/playwright-report:/app/playwright-report
     depends_on:
       - web
       - socket
       - mailhog
-    command: yarn test
     networks:
       - power-paint-network
 

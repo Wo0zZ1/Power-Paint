@@ -128,7 +128,7 @@ services:
     networks:
       - power-paint-network
     depends_on:
-      - web
+      # - web
       - socket
 
 volumes:
