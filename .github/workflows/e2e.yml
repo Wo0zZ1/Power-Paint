@@ -84,14 +84,6 @@ jobs:
           path: ./Power-Paint-E2E/test-results/
           retention-days: 7
 
-      - name: Upload screenshots
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: failure-screenshots
-          path: ./Power-Paint-E2E/screenshots/
-          retention-days: 7
-
       - name: Fail if tests failed
         if: steps.tests.outcome == 'failure'
         run: exit 1
