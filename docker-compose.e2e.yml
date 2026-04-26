@@ -116,6 +116,9 @@ services:
       - ./nginx/templates/power-paint.conf.template:/etc/nginx/templates/default.conf.template:ro
       # - ./certbot/www:/var/www/certbot:ro
       # - ./certbot/conf:/etc/nginx/ssl:ro
+    ports:
+      - "80:80"
+      - "443:443"
     networks:
       - power-paint-network
     depends_on:
@@ -136,7 +139,7 @@ services:
       dockerfile: dockerfile
     environment:
       WEB_URL: ${NEXT_PUBLIC_BASE_URL}
-      MAILHOG_URL: http://mailhog:8025
+      MAILHOG_URL: http://localhost:8025
     volumes:
       - ./Power-Paint-E2E/playwright-report:/app/playwright-report
       - ./Power-Paint-E2E/test-results:/app/test-results
@@ -146,8 +149,9 @@ services:
       - socket
       - nginx
       - mailhog
-    networks:
-      - power-paint-network
+    network_mode: host
+    # networks:
+    #   - power-paint-network
 
 networks:
   power-paint-network:
