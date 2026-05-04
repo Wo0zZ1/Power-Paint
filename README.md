@@ -268,6 +268,14 @@ Power Paint включает в себя встроенную систему ema
 
 ![E2E](./docs/assets/e2e-tests.png)
 
+#### Lighthouse отчёт
+
+![Lighthouse](./docs/assets/lighthouse-stats.png)
+
+#### Lighthouse метрики
+
+![Lighthouse метрики](./docs/assets/lighthouse-metrics.png)
+
 ## 📄 Лицензия
 
 Проект распространяется под лицензией [MIT](LICENSE)
