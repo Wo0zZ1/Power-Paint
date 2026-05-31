@@ -1,9 +1,12 @@
 #!/bin/sh
-set -eu
+
+finish() {
+  return 0 2>/dev/null || exit 0
+}
 
 if [ -z "${DOMAIN:-}" ]; then
   echo "[bootstrap-cert] DOMAIN is not set, skip fallback certificate bootstrap"
-  exit 0
+  finish
 fi
 
 CERT_DIR="/etc/letsencrypt/live/${DOMAIN}"
@@ -12,7 +15,7 @@ PRIVKEY_PATH="${CERT_DIR}/privkey.pem"
 
 if [ -s "$FULLCHAIN_PATH" ] && [ -s "$PRIVKEY_PATH" ]; then
   echo "[bootstrap-cert] Certificate files already exist for ${DOMAIN}"
-  exit 0
+  finish
 fi
 
 echo "[bootstrap-cert] Certificate files not found for ${DOMAIN}, generating temporary self-signed certificate"
@@ -26,3 +29,4 @@ openssl req -x509 -nodes -newkey rsa:2048 -days 1 \
   -out "$FULLCHAIN_PATH"
 
 echo "[bootstrap-cert] Temporary certificate created for ${DOMAIN}"
+finish

@@ -120,7 +120,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/templates/power-paint.conf.template:/etc/nginx/templates/default.conf.template:ro
-      - ./nginx/docker-entrypoint.d/05-bootstrap-fallback-cert.sh:/docker-entrypoint.d/05-bootstrap-fallback-cert.sh:ro
+      - ./nginx/docker-entrypoint.d/05-bootstrap-fallback-cert.sh:/docker-entrypoint.d/05-bootstrap-fallback-cert.envsh:ro
       - certbot-www:/var/www/certbot:ro
       - letsencrypt:/etc/letsencrypt:ro
     networks:
