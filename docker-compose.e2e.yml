@@ -7,7 +7,7 @@ services:
       POSTGRES_PORT: ${POSTGRES_PORT}
       POSTGRES_DB: ${POSTGRES_DB}
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -113,9 +113,7 @@ services:
       SOCKET_PORT: $SOCKET_PORT
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/templates/power-paint.conf.template:/etc/nginx/templates/default.conf.template:ro
-      # - ./certbot/www:/var/www/certbot:ro
-      # - ./certbot/conf:/etc/nginx/ssl:ro
+      - ./nginx/templates/power-paint-http.conf.template:/etc/nginx/templates/default.conf.template:ro
     ports:
       - "80:80"
       - "443:443"

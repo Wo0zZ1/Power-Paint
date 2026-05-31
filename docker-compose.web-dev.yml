@@ -125,7 +125,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/templates/power-paint.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - ./nginx/templates/power-paint-http.conf.template:/etc/nginx/templates/default.conf.template:ro
     networks:
       - power-paint-network
     depends_on:
