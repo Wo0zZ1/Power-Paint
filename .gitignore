@@ -3,4 +3,6 @@
 .env.test
 .env.production
 
+data
+
 *.pem
