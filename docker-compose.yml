@@ -122,7 +122,7 @@ services:
       - ./nginx/templates/power-paint.conf.template:/etc/nginx/templates/default.conf.template:ro
       - ./nginx/docker-entrypoint.d/05-bootstrap-fallback-cert.sh:/docker-entrypoint.d/05-bootstrap-fallback-cert.sh:ro
       - certbot-www:/var/www/certbot:ro
-      - letsencrypt:/etc/letsencrypt:ro
+      - letsencrypt:/etc/letsencrypt
     networks:
       - power-paint-network
     depends_on:
